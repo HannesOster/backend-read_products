@@ -16,6 +16,7 @@ export default function Product() {
   if (!data) {
     return;
   }
+  console.log(data);
 
   return (
     <ProductCard>
@@ -24,6 +25,17 @@ export default function Product() {
       <p>
         Price: {data.price} {data.currency}
       </p>
+      <ul>
+        {data.reviews.map((review) => {
+          return (
+            <li key={review._id}>
+              <h3>{review.title}</h3>
+              <p>{review.text}</p>
+            </li>
+          );
+        })}
+      </ul>
+
       <StyledLink href="/">Back to all</StyledLink>
     </ProductCard>
   );

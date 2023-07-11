@@ -6,7 +6,7 @@ export default async function handler(request, response) {
   const { id } = request.query;
 
   if (request.method === "GET") {
-    const product = await Product.findById(id);
+    const product = await Product.findById(id).populate("reviews");
     if (!product) {
       response.status(404).json({ status: "Joke not found." });
       return;
@@ -16,15 +16,3 @@ export default async function handler(request, response) {
   }
   request.status(405).json({ status: "Request method not implemented." });
 }
-
-// export default async function handler(request, response) {
-//   await dbConnect();
-
-//   if (request.method === "GET") {
-//     const products = await Product.find();
-//     response.status(200).json(products);
-//     return;
-//   }
-
-//   return request.status(405).json({ status: "Request method not implemented" });
-// }
